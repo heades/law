@@ -1,4 +1,4 @@
-law: The Lawvere Category Library
+law: The Lawvere Categorical Logic Library
 ===
 
 This is my private library for conducting my work in categorical
