@@ -1,5 +1,5 @@
-law
-===
+law: The Lawvere Category Library
+===--------------------------------
 
 This is my private library for conducting my work in categorical
 logic.  Feel free to use it, or contribute in anyway.
