@@ -11,8 +11,10 @@ Files:
     - (Total) equivalence relations.
     
   - [Setoid/Total.agda](Setoid/Total.agda)
-    - Total setoids.
-    - Total setoid maps.
+    - Setoids.
+    - Setoid maps.
+    - Setoid predicates.
+    - Setoid Subcarriers.
     - Subsetoids.
 
   - [Category.agda](Category.agda)
