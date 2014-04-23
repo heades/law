@@ -37,7 +37,7 @@ subcat : {l : Level} → (ℂ : Cat {l})(O : Set l)
   → (∀{A B C}
          → {f : el (Hom ℂ (oinc A) (oinc B))}
          → {g : el (Hom ℂ (oinc B) (oinc C))} 
-         → (pf (minc {A}{B}) f) 
+         → (pf minc f)
          → (pf minc g) 
          → (pf minc (f ○[ comp ℂ ] g)))
   → Cat {l}

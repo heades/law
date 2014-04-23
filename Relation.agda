@@ -18,12 +18,15 @@ record EqRel {l : Level}{A : Set l}(R : A → A → Set l) : Set l where
 open ParRel
 open EqRel
 
+-- The product of two relations.
 ProductRel : {l l' : Level}{A : Set l}{B : Set l'} 
   → (R : A → A → Set l) 
   → (R' : B → B → Set l') 
   → (A × B → A × B → Set (l ⊔ l'))
 ProductRel R R' a b = (R (proj₁ a) (proj₁ b)) × (R' (proj₂ a) (proj₂ b))
 
+-- The product of two partial equivalence relations is also a partial
+-- equivalence relation.
 ProductRelIsParRel : {l l' : Level}{A : Set l}{B : Set l'} 
   → (R : A → A → Set l) 
   → (R' : B → B → Set l') 
@@ -34,6 +37,8 @@ ProductRelIsParRel R R' erPF₁ erPF₂ =
   record { symPf   = λ x₁ → symPf erPF₁ (proj₁ x₁) , symPf erPF₂ (proj₂ x₁); 
            transPf = λ x₁ x₂ → (transPf erPF₁ (proj₁ x₁) (proj₁ x₂)) , (transPf erPF₂ (proj₂ x₁) (proj₂ x₂)) }
 
+-- The product of two (total) equivalence relations is also a (total)
+-- equivalence relation.
 ProductRelIsEqRel : {l l' : Level}{A : Set l}{B : Set l'} 
   → (R : A → A → Set l) 
   → (R' : B → B → Set l') 

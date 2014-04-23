@@ -1,8 +1,10 @@
--------------------------------------------------------------------------
--- The contents of this file is based on the work in "Setoids in Type  --
--- Theory" by Barthe et. al.                                           --
--- See http://www.cs.ru.nl/~venanzio/publications/Setoids_JFP_2003.pdf --
--------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+-- The contents of this file is based on the work in "Setoids in Type           --
+-- Theory" by Barthe et al. and Capretta's "Universal Algebra in Type Theory."  --
+--                                                                              --
+-- See http://www.cs.ru.nl/~venanzio/publications/Setoids_JFP_2003.pdf and      --
+-- http://www.cs.ru.nl/~venanzio/publications/Universal_Algebra_TPHOLs_1999.pdf --
+----------------------------------------------------------------------------------
 module Setoid.Total where
 
 open import Level renaming (suc to lsuc)
@@ -78,6 +80,7 @@ Subsetoid A P with parEqPf (eqRpf A)
                                                        transPf = λ x₁ x₂ → transPf a x₁ x₂ }; 
                                     refPf = λ {x} → refPf (eqRpf A) } }
 
+-- The product of two setoids.
 ProductSetoid : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Setoid {l₁ ⊔ l₂}
 ProductSetoid A B =  record { el = (el A) × (el B); 
                               eq = ProductRel (eq A) (eq B); 
