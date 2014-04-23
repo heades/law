@@ -87,7 +87,7 @@ ProductSetoid A B =  record { el = (el A) × (el B);
                            eqRpf = ProductRelIsEqRel (eq A) (eq B) (eqRpf A) (eqRpf B) }
 
 -- Next we define a relaxed notion of a subsetoid where the predicate
--- does not have to be invariant on the equality. Are these garbage?
+-- does not have to be invariant on the equality.
 ↓Setoid : {l : Level} 
   → (S : Setoid {l}) 
   → (P : el S → Set l)
