@@ -24,29 +24,30 @@ open Setoid
 ⟨_⟩[_≡_] : {l : Level} → (A : Setoid {l}) → el A → el A → Set l
 ⟨ A ⟩[ x ≡ y ] = eq A x y
 
--- Total setoids maps.
-record MapTy {l : Level} (A : Setoid {l}) (B : Setoid {l}) : Set l where
+-- Total setoids maps.  Barthe et al. calls "map."
+record SetoidFun {l : Level} (A : Setoid {l}) (B : Setoid {l}) : Set l where
   field
     appT : el A → el B
     extT : ∀ {x y} → ⟨ A ⟩[ x ≡ y ] → ⟨ B ⟩[ appT x ≡ appT y ]
 
-open MapTy
+open SetoidFun
 
--- The setoid function space from A to B.
-Map : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l}
-Map A B with parEqPf (eqRpf B)    
-... | b = record { el = MapTy A B; 
+-- The setoid function space from A to B.  Barthe et al. calls this
+-- "Map."
+SetoidFunSpace : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l}
+SetoidFunSpace A B with parEqPf (eqRpf B)    
+... | b = record { el = SetoidFun A B; 
                    eq = λ f g → ∀ (x : el A) → ⟨ B ⟩[ appT f x ≡ appT g x ]; 
                 eqRpf = record { parEqPf = record { symPf = λ x₁ x₂ → symPf b (x₁ x₂); 
                                                   transPf = λ x₁ x₂ x₃ → transPf b (x₁ x₃) (x₂ x₃) }; 
                                  refPf   = λ x₁ → refPf (eqRpf B) } }
 
 -- Total binary setoid maps.
-BMap : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l} → Set l
-BMap A B C = MapTy A (Map B C)
+BinSetoidFun : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l} → Set l
+BinSetoidFun A B C = SetoidFun A (SetoidFunSpace B C)
 
 -- A nice notation for composition of BMap's.
-_○[_]_ : {l : Level}{A B C : Setoid {l}} → el A → BMap A B C → el B → el C
+_○[_]_ : {l : Level}{A B C : Setoid {l}} → el A → BinSetoidFun A B C → el B → el C
 f ○[ comp ] g = appT (appT comp f) g
 
 -- Setoid predicates.

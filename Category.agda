@@ -7,7 +7,7 @@ open import Setoid.Total
 open import Relation
 
 open Setoid
-open MapTy
+open SetoidFun
 open Pred
 open Subcarrier
 open EqRel
@@ -17,7 +17,7 @@ record Cat {l : Level} : Set (lsuc l) where
   field
     Obj     : Set l
     Hom     : Obj → Obj → Setoid {l}
-    comp    : {A B C : Obj} → BMap (Hom A B) (Hom B C) (Hom A C)
+    comp    : {A B C : Obj} → BinSetoidFun (Hom A B) (Hom B C) (Hom A C)
     id      : {A : Obj} → el (Hom A A) 
     assocPf : ∀{A B C D}{f : el (Hom A B)}{g : el (Hom B C)}{h : el (Hom C D)} 
                → ⟨ Hom A D ⟩[ f ○[ comp ] (g ○[ comp ] h)  ≡  (f ○[ comp ] g) ○[ comp ] h ]
@@ -25,8 +25,11 @@ record Cat {l : Level} : Set (lsuc l) where
 
 open Cat    
 
-
-
+-- The definition of subcategories.  One point that I learned while
+-- implementing the following is that composition being defined as a
+-- binary-setoid function (BinSetoidFun) of the respective homs gives
+-- us equational facts about composition which arrises from the
+-- definition of setoid functions (SetoidFun).
 subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
   → (oinc : O → Obj ℂ) 
   → (minc : ∀{A B} → Pred {l} (Hom ℂ (oinc A) (oinc B)))
