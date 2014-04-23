@@ -25,17 +25,7 @@ record Cat {l : Level} : Set (lsuc l) where
 
 open Cat
 
--- The definition of strict-replete subcategories.  These are strict
--- replete, because we are using a setoid predicate (Pred) to specify
--- which morphisms are in the subcategory, which contains a proof that
--- if two morphisms are equivalent in the ambiant category (ℂ), and
--- one of them is in the subcategory, then the other must also be in
--- the subcategory.  Now the notion of equivalence here is the setoid
--- equivalence, and not isomorphism in the arrow category, thus we
--- call these strict-replete categories.
---
--- See http://ncatlab.org/nlab/show/replete+subcategory for more about
--- replete subcategories.
+-- Subcategories.
 strict-replete-subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
   → (oinc : O → Obj ℂ) 
   → (minc : ∀{A B} → Pred {l} (Hom ℂ (oinc A) (oinc B)))
@@ -63,23 +53,3 @@ strict-replete-subcat ℂ O oinc minc idPF compPF =
     idPf = idPf ℂ 
   }
 
--- The definition of general subcategories.
-subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
-  → (oinc : O → Obj ℂ) 
-  → (minc : ∀{A B} → el (Hom ℂ (oinc A) (oinc B)) → Set l)
-  → (∀{A} → minc (id ℂ {oinc A}))
-  → (∀{A B C}
-         → {f : el (Hom ℂ (oinc A) (oinc B))}
-         → {g : el (Hom ℂ (oinc B) (oinc C))} 
-         → (minc f)
-         → (minc g) 
-         → (minc (f ○[ comp ℂ ] g)))
-  → Cat {l}
-subcat ℂ O oinc minc idPF compPF =   
-    record {                
-      Obj = O;
-      Hom = λ A B → ↓Setoid (Hom ℂ (oinc A) (oinc B)) (minc {A}{B});
-     comp = λ {A} {B} {C} → ↓BinSetoidFun (comp ℂ) compPF;
-       id = (id ℂ , idPF);
-  assocPf = assocPf ℂ;
-     idPf = idPf ℂ }
