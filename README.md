@@ -9,15 +9,19 @@ Files:
   - [Relation.agda](Relation.agda)
     - Partial equivalence relations.
     - (Total) equivalence relations.
-    - Product of Relations.
+    - Product of relations.
     
   - [Setoid/Total.agda](Setoid/Total.agda)
     - Setoids.
-    - Setoid maps.
+    - Setoid functions.
+    - Binary setoid functions.
     - Setoid predicates.
-    - Setoid Subcarriers.
+    - Setoid subcarriers.
     - Subsetoids.
-    - Product of Setoids.
+    - Product of setoids.
+    - Restricted setoids.
+    - Restricted setoid functions.
+    - Binary restricted setoid functions.
 
   - [Category.agda](Category.agda)
     - Categories.

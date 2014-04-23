@@ -85,3 +85,41 @@ ProductSetoid : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Seto
 ProductSetoid A B =  record { el = (el A) × (el B); 
                               eq = ProductRel (eq A) (eq B); 
                            eqRpf = ProductRelIsEqRel (eq A) (eq B) (eqRpf A) (eqRpf B) }
+
+-- Next we define a relaxed notion of a subsetoid where the predicate
+-- does not have to be invariant on the equality. Are these garbage?
+↓Setoid : {l : Level} 
+  → (S : Setoid {l}) 
+  → (P : el S → Set l)
+  → Setoid {l}
+↓Setoid S P = 
+  record { el = eq S ↓ P; 
+           eq = λ f g → ⟨ S ⟩[ proj₁ f ≡ proj₁ g ]; 
+        eqRpf = ↓EqRel (eq S) P (eqRpf S)}
+
+-- Restricted setoid functions.
+↓SetoidFun : 
+    {l : Level}
+    {S₁ S₂ : Setoid {l}}
+    {P₁ : el S₁ → Set l}
+    {P₂ : el S₂ → Set l}
+  → (F : SetoidFun S₁ S₂)
+  → ({f : el S₁} → (P₁ f) → P₂ (appT F f))
+  → SetoidFun (↓Setoid S₁ P₁) (↓Setoid S₂ P₂)
+↓SetoidFun {l}{S₁}{S₂}{P₁}{P₂} F pf = 
+  record { appT = λ x₁ → appT F (proj₁ x₁) , pf {proj₁ x₁} (proj₂ x₁); 
+           extT = λ {x}{y} x₂ → extT F x₂ }
+
+-- Binary restricted setoid functions.
+↓BinSetoidFun : 
+    {l : Level}
+    {S₁ S₂ S₃ : Setoid {l}}
+    {P₁ : el S₁ → Set l}
+    {P₂ : el S₂ → Set l}
+    {P₃ : el S₃ → Set l}
+  → (F : BinSetoidFun S₁ S₂ S₃)
+  → ({f : el S₁}{g : el S₂} → (P₁ f) → (P₂ g) → P₃ (f ○[ F ] g))
+  → BinSetoidFun (↓Setoid S₁ P₁) (↓Setoid S₂ P₂) (↓Setoid S₃ P₃)
+↓BinSetoidFun {l}{S₁}{S₂}{S₃}{P₁}{P₂}{P₃} F pf = 
+  record { appT = λ f → ↓SetoidFun (appT F (proj₁ f)) (pf (proj₂ f)); 
+           extT = λ x₁ x₂ → extT F x₁ (proj₁ x₂) }

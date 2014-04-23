@@ -25,11 +25,7 @@ record Cat {l : Level} : Set (lsuc l) where
 
 open Cat
 
--- The definition of subcategories.  One point that I learned while
--- implementing the following is that composition being defined as a
--- binary-setoid function (BinSetoidFun) of the respective homs gives
--- us equational facts about composition which arrises from the
--- definition of setoid functions (SetoidFun).
+-- Subcategories.
 subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
   → (oinc : O → Obj ℂ) 
   → (minc : ∀{A B} → Pred {l} (Hom ℂ (oinc A) (oinc B)))
@@ -56,3 +52,4 @@ subcat ℂ O oinc minc idPF compPF =
     assocPf = assocPf ℂ;
     idPf = idPf ℂ 
   }
+
