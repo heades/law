@@ -6,6 +6,8 @@
 module Setoid.Total where
 
 open import Level renaming (suc to lsuc)
+open import Data.Product
+
 open import Relation
 
 open ParRel
@@ -75,3 +77,8 @@ Subsetoid A P with parEqPf (eqRpf A)
                    eqRpf = record { parEqPf = record { symPf   = λ x₁ → symPf a x₁; 
                                                        transPf = λ x₁ x₂ → transPf a x₁ x₂ }; 
                                     refPf = λ {x} → refPf (eqRpf A) } }
+
+ProductSetoid : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Setoid {l₁ ⊔ l₂}
+ProductSetoid A B =  record { el = (el A) × (el B); 
+                              eq = ProductRel (eq A) (eq B); 
+                           eqRpf = ProductRelIsEqRel (eq A) (eq B) (eqRpf A) (eqRpf B) }

@@ -23,7 +23,7 @@ record Cat {l : Level} : Set (lsuc l) where
                → ⟨ Hom A D ⟩[ f ○[ comp ] (g ○[ comp ] h)  ≡  (f ○[ comp ] g) ○[ comp ] h ]
     idPf    : ∀{A B}{f : el (Hom A B)} → ⟨ Hom A B ⟩[ id ○[ comp ] f ≡ f ○[ comp ] id  ]
 
-open Cat    
+open Cat
 
 -- The definition of subcategories.  One point that I learned while
 -- implementing the following is that composition being defined as a

@@ -1,6 +1,7 @@
 module Relation where
 
 open import Level renaming (suc to lsuc)
+open import Data.Product
 
 -- Partial equivalence relations.
 record ParRel {l : Level}{A : Set l}(R : A → A → Set l) : Set l where
@@ -14,3 +15,31 @@ record EqRel {l : Level}{A : Set l}(R : A → A → Set l) : Set l where
     parEqPf : ParRel R
     refPf   : ∀{x} → R x x
 
+open ParRel
+open EqRel
+
+ProductRel : {l l' : Level}{A : Set l}{B : Set l'} 
+  → (R : A → A → Set l) 
+  → (R' : B → B → Set l') 
+  → (A × B → A × B → Set (l ⊔ l'))
+ProductRel R R' a b = (R (proj₁ a) (proj₁ b)) × (R' (proj₂ a) (proj₂ b))
+
+ProductRelIsParRel : {l l' : Level}{A : Set l}{B : Set l'} 
+  → (R : A → A → Set l) 
+  → (R' : B → B → Set l') 
+  → ParRel R
+  → ParRel R'
+  → ParRel (ProductRel R R')
+ProductRelIsParRel R R' erPF₁ erPF₂ = 
+  record { symPf   = λ x₁ → symPf erPF₁ (proj₁ x₁) , symPf erPF₂ (proj₂ x₁); 
+           transPf = λ x₁ x₂ → (transPf erPF₁ (proj₁ x₁) (proj₁ x₂)) , (transPf erPF₂ (proj₂ x₁) (proj₂ x₂)) }
+
+ProductRelIsEqRel : {l l' : Level}{A : Set l}{B : Set l'} 
+  → (R : A → A → Set l) 
+  → (R' : B → B → Set l') 
+  → EqRel R
+  → EqRel R'
+  → EqRel (ProductRel R R')
+ProductRelIsEqRel R R' erPF₁ erPF₂ = 
+  record { parEqPf = ProductRelIsParRel R R' (parEqPf erPF₁) (parEqPf erPF₂); 
+           refPf   = λ {x} → (refPf erPF₁ {proj₁ x}) , (refPf erPF₂ {proj₂ x}) }
