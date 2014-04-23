@@ -24,7 +24,6 @@ Files:
     - Binary restricted setoid functions.
 
   - [Category.agda](Category.agda)
-    - Categories.      
-    - Strict-replete subcategories.
+    - Categories.
     - Subcategories.
     

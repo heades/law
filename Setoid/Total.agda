@@ -86,13 +86,8 @@ ProductSetoid A B =  record { el = (el A) × (el B);
                               eq = ProductRel (eq A) (eq B); 
                            eqRpf = ProductRelIsEqRel (eq A) (eq B) (eqRpf A) (eqRpf B) }
 
--- Next we define a relaxed notion of a subsetoid. Here we do not
--- require the predicate to have to respect equality.  That is we may
--- restrict the carrier set by excluding some equal elements.  That if
--- if we choose a to be in the subcarrier and we know a is equal to b,
--- then b need not be in the subcarrier.  This more relaxed notion
--- will allow us to define general subcategories.  We call these
--- restricted setoids.
+-- Next we define a relaxed notion of a subsetoid where the predicate
+-- does not have to be invariant on the equality. Are these garbage?
 ↓Setoid : {l : Level} 
   → (S : Setoid {l}) 
   → (P : el S → Set l)

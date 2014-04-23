@@ -26,7 +26,7 @@ record Cat {l : Level} : Set (lsuc l) where
 open Cat
 
 -- Subcategories.
-strict-replete-subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
+subcat : {l : Level} → (ℂ : Cat {l})(O : Set l) 
   → (oinc : O → Obj ℂ) 
   → (minc : ∀{A B} → Pred {l} (Hom ℂ (oinc A) (oinc B)))
   → (∀{A} → pf (minc {A}{A}) (id ℂ {oinc A}))
@@ -37,7 +37,7 @@ strict-replete-subcat : {l : Level} → (ℂ : Cat {l})(O : Set l)
          → (pf minc g) 
          → (pf minc (f ○[ comp ℂ ] g)))
   → Cat {l}
-strict-replete-subcat ℂ O oinc minc idPF compPF = 
+subcat ℂ O oinc minc idPF compPF = 
   record {
     Obj = O;
     Hom = λ A B → Subsetoid (Hom ℂ (oinc A) (oinc B)) (minc {A}{B});                                     
