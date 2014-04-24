@@ -25,5 +25,6 @@ Files:
 
   - [Category.agda](Category.agda)
     - Categories.
+
+  - [Subcategory.agda](Subcategory.agda)
     - Subcategories.
-    
