@@ -10,7 +10,7 @@ module Setoid.Total where
 open import Level renaming (suc to lsuc)
 open import Data.Product
 
-open import Relation
+open import Relation.Relation
 
 open ParRel
 open EqRel

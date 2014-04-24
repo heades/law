@@ -1,11 +1,11 @@
-module Subcategory where
+module Category.Subcategory where
 
 open import Level
 open import Data.Product
 
 open import Setoid.Total
-open import Relation
-open import Category
+open import Relation.Relation
+open import Category.Category
 
 open Setoid
 open SetoidFun
