@@ -29,7 +29,7 @@ open Setoid
 ⟨ A ⟩[ x ≡ y ] = eq A x y
 
 -- Total setoids maps.  Barthe et al. calls "map."
-record SetoidFun {l : Level} (A : Setoid {l}) (B : Setoid {l}) : Set l where
+record SetoidFun {l₁ l₂ : Level} (A : Setoid {l₁}) (B : Setoid {l₂}) : Set (l₁ ⊔ l₂) where
   field
     appT : el A → el B
     extT : ∀ {x y} → ⟨ A ⟩[ x ≡ y ] → ⟨ B ⟩[ appT x ≡ appT y ]
@@ -38,7 +38,7 @@ open SetoidFun
 
 -- The setoid function space from A to B.  Barthe et al. calls this
 -- "Map."
-SetoidFunSpace : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l}
+SetoidFunSpace : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Setoid {l₁ ⊔ l₂}
 SetoidFunSpace A B with parEqPf (eqRpf B)    
 ... | b = record { el = SetoidFun A B; 
                    eq = λ f g → ∀ (x : el A) → ⟨ B ⟩[ appT f x ≡ appT g x ]; 
@@ -47,7 +47,7 @@ SetoidFunSpace A B with parEqPf (eqRpf B)
                                  refPf   = λ x₁ → refPf (eqRpf B) } }
 
 -- Total binary setoid maps.
-BinSetoidFun : {l : Level} → Setoid {l} → Setoid {l} → Setoid {l} → Set l
+BinSetoidFun : {l₁ l₂ l₃ : Level} → Setoid {l₁} → Setoid {l₂} → Setoid {l₃} → Set (l₁ ⊔ l₂ ⊔ l₃)
 BinSetoidFun A B C = SetoidFun A (SetoidFunSpace B C)
 
 -- A nice notation for composition of BMap's.
@@ -85,6 +85,46 @@ ProductSetoid : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Seto
 ProductSetoid A B =  record { el = (el A) × (el B); 
                               eq = ProductRel (eq A) (eq B); 
                            eqRpf = ProductRelIsEqRel (eq A) (eq B) (eqRpf A) (eqRpf B) }
+_●ₛ_ : {l₁ l₂ : Level} → Setoid {l₁} → Setoid {l₂} → Setoid {l₁ ⊔ l₂}
+A ●ₛ B = ProductSetoid A B
+
+-- Product setoid functions.
+ProdSetoidFun : {l₁ l₂ l₃ l₄ : Level}
+                {A₁ : Setoid {l₁}}
+                {B₁ : Setoid {l₂}}
+                {A₂ : Setoid {l₃}}
+                {B₂ : Setoid {l₄}}
+              → (F₁ : SetoidFun A₁ A₂)
+              → (F₂ : SetoidFun B₁ B₂)
+              → SetoidFun (A₁ ●ₛ B₁) (A₂ ●ₛ B₂)
+ProdSetoidFun F₁ F₂ = record { appT = λ x → appT F₁ (proj₁ x) , appT F₂ (proj₂ x); 
+                               extT = λ x₁ → extT F₁ (proj₁ x₁) , extT F₂ (proj₂ x₁) }
+
+-- Binary product setoid functions.
+BinProdSetoidFun : {l₁ l₂ l₃ l₄ : Level}
+                   {A₁ : Setoid {l₁}}
+                   {B₁ : Setoid {l₂}}
+                   {C₁ : Setoid {l₃}}
+                   {A₂ : Setoid {l₄}}
+                   {B₂ : Setoid {l₄}}
+                   {C₂ : Setoid {l₄}}
+                 → (F₁ : BinSetoidFun A₁ B₁ C₁)
+                 → (F₂ : BinSetoidFun A₂ B₂ C₂)
+                 → BinSetoidFun (A₁ ●ₛ A₂) (B₁ ●ₛ B₂) (C₁ ●ₛ C₂)
+BinProdSetoidFun F₁ F₂ = record { appT = λ x → ProdSetoidFun (appT F₁ (proj₁ x)) (appT F₂ (proj₂ x));
+                                  extT = λ {a b} c d → (extT F₁ (proj₁ c) (proj₁ d)) , (extT F₂ (proj₂ c) (proj₂ d)) }
+
+_●b_ : {l₁ l₂ l₃ l₄ : Level}
+                   {A₁ : Setoid {l₁}}
+                   {B₁ : Setoid {l₂}}
+                   {C₁ : Setoid {l₃}}
+                   {A₂ : Setoid {l₄}}
+                   {B₂ : Setoid {l₄}}
+                   {C₂ : Setoid {l₄}}
+                 → (F₁ : BinSetoidFun A₁ B₁ C₁)
+                 → (F₂ : BinSetoidFun A₂ B₂ C₂)
+                 → BinSetoidFun (A₁ ●ₛ A₂) (B₁ ●ₛ B₂) (C₁ ●ₛ C₂)
+F₁ ●b F₂ = BinProdSetoidFun F₁ F₂
 
 -- Next we define a relaxed notion of a subsetoid where the predicate
 -- does not have to be invariant on the equality.

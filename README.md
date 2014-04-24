@@ -28,3 +28,6 @@ Files:
 
   - [Category/Subcategory.agda](Category/Subcategory.agda)
     - Subcategories.
+
+  - [Category/CategoryCons.agda](Category/CategoryCons.agda)
+    - Product categories.
