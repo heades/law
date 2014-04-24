@@ -1,10 +1,10 @@
-module Category where
+module Category.Category where
 
 open import Level renaming (suc to lsuc)
 open import Data.Product
 
 open import Setoid.Total
-open import Relation
+open import Relation.Relation
 
 open Setoid
 

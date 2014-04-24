@@ -6,7 +6,7 @@ logic.  Feel free to use it, or contribute in anyway.
 
 Files:
 
-  - [Relation.agda](Relation.agda)
+  - [Relation/Relation.agda](Relation/Relation.agda)
     - Partial equivalence relations.
     - (Total) equivalence relations.
     - Product of relations.
@@ -23,8 +23,8 @@ Files:
     - Restricted setoid functions.
     - Binary restricted setoid functions.
 
-  - [Category.agda](Category.agda)
+  - [Category/Category.agda](Category/Category.agda)
     - Categories.
 
-  - [Subcategory.agda](Subcategory.agda)
+  - [Category/Subcategory.agda](Category/Subcategory.agda)
     - Subcategories.

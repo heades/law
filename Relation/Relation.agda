@@ -1,4 +1,4 @@
-module Relation where
+module Relation.Relation where
 
 open import Level renaming (suc to lsuc)
 open import Data.Product
