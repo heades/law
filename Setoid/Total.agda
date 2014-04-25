@@ -22,7 +22,7 @@ record Setoid {l : Level} : Set (lsuc l) where
    eq  : el → el → Set l
    eqRpf : EqRel eq
 
-open Setoid
+open Setoid public
 
 -- Notation for the underlying equivalence of a setoid.
 ⟨_⟩[_≡_] : {l : Level} → (A : Setoid {l}) → el A → el A → Set l
@@ -34,7 +34,7 @@ record SetoidFun {l₁ l₂ : Level} (A : Setoid {l₁}) (B : Setoid {l₂}) : S
     appT : el A → el B
     extT : ∀ {x y} → ⟨ A ⟩[ x ≡ y ] → ⟨ B ⟩[ appT x ≡ appT y ]
 
-open SetoidFun
+open SetoidFun public
 
 -- The setoid function space from A to B.  Barthe et al. calls this
 -- "Map."
