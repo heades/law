@@ -11,14 +11,16 @@ Files:
     - (Total) equivalence relations.
     - Product of relations.
     
-  - [Setoid/Total.agda](Setoid/Total.agda)
+  - [Setoid/Total.agda](Setoid/Total.agda#L10)
     - Setoids.
     - Setoid functions.
     - Binary setoid functions.
     - Setoid predicates.
     - Setoid subcarriers.
     - Subsetoids.
-    - Product of setoids.
+    - Products of setoids.
+    - Setoid functions between product setoids.
+    - Binary setoid functions between product setoids.
     - Restricted setoids.
     - Restricted setoid functions.
     - Binary restricted setoid functions.
@@ -31,3 +33,6 @@ Files:
 
   - [Category/CategoryCons.agda](Category/CategoryCons.agda)
     - Product categories.
+
+  - [Category/Functor.agda](Category/Functor.agda)
+    - Functors.
