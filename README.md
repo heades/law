@@ -11,7 +11,7 @@ Files:
     - (Total) equivalence relations.
     - Product of relations.
     
-  - [Setoid/Total.agda](Setoid/Total.agda#L10)
+  - [Setoid/Total.agda](Setoid/Total.agda)
     - Setoids.
     - Setoid functions.
     - Binary setoid functions.
@@ -36,3 +36,11 @@ Files:
 
   - [Category/Functor.agda](Category/Functor.agda)
     - Functors.
+
+  - [Category/Preorder.agda](Category/Preorder.agda)
+    - Preorders.
+
+  - [Category/Poset.agda](Category/Poset.agda)
+    - Poset.
+
+  
