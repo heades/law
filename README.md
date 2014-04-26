@@ -28,6 +28,9 @@ Files:
   - [Category/Category.agda](Category/Category.agda)
     - Categories.
 
+  - [Category/CatEq.agda](Category/CatEq.agda)
+    - Equational definitions and facts pertaining to categories.
+
   - [Category/Subcategory.agda](Category/Subcategory.agda)
     - Subcategories.
 
@@ -43,4 +46,5 @@ Files:
   - [Category/Poset.agda](Category/Poset.agda)
     - Poset.
 
-  
+  - [Category/NatTrans.agda](Category/NatTrans.agda)
+    - Natural transformations.
