@@ -32,7 +32,7 @@ Files:
     - Isomophisms.
     
   - [Category/CatEq.agda](Category/CatEq.agda)
-    - Equational definitions and facts pertaining to categories.
+    - Commutative squares.
 
   - [Category/Subcategory.agda](Category/Subcategory.agda)
     - Subcategories.
