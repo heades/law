@@ -5,10 +5,9 @@ module Category.NatTrans where
 
 open import Level
 
-open import Category.Category
-open import Category.Funct
-open import Setoid.Total
-open import Category.CatEq
+open import Category.Category public
+open import Category.Funct public 
+open import Category.CatEq public
 
 record NatTrans {l₁ l₂ : Level} 
                 {ℂ₁ : Cat {l₁}}
@@ -20,3 +19,5 @@ record NatTrans {l₁ l₂ : Level}
 
     -- The natural transformation law.
     η-ax : ∀{A B}{f : el (Hom ℂ₁ A B)} → comm-square {ℂ = ℂ₂} (appT (fmap F) f) (η B) (η A) (appT (fmap G) f)
+
+open NatTrans public

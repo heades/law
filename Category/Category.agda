@@ -1,14 +1,16 @@
+----------------------------------------------------------------
+-- This file contains the definition of categories.           --
+----------------------------------------------------------------
 module Category.Category where
 
-open import Level renaming (suc to lsuc)
+open import Level public renaming (suc to lsuc)
 open import Data.Product
 
-open import Setoid.Total
+open import Setoid.Total public
 open import Relation.Relation
 
-open Setoid
+open Setoid public
 
--- The definition of categories.
 record Cat {l : Level} : Set (lsuc l) where
   field
     Obj     : Set l
