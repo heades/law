@@ -28,6 +28,9 @@ Files:
   - [Category/Category.agda](Category/Category.agda)
     - Categories.
 
+  - [Category/Iso.agda](Category/Iso.agda)
+    - Isomophisms.
+    
   - [Category/CatEq.agda](Category/CatEq.agda)
     - Equational definitions and facts pertaining to categories.
 
@@ -44,8 +47,10 @@ Files:
     - Preorders.
 
   - [Category/Poset.agda](Category/Poset.agda)
-    - Poset.
+    - Posets.
 
   - [Category/NatTrans.agda](Category/NatTrans.agda)
     - Natural transformations.
 
+  - [Category/NatIso.agda](Category/NatIso.agda)
+    - Natural isomophisms.
