@@ -13,11 +13,20 @@ module Equality.Eq where
 
 open import Level
 
-data _≅_ {l : Level} {A : Set l} (a : A) : {A' : Set l} → A' → Set (suc l) where
+open import Relation.Binary.PropositionalEquality public renaming (sym to prop-sym ; trans to prop-trans; refl to prop-refl)
+
+data _≅_ {l : Level} {A : Set l} (a : A) : {A' : Set l} → A' → Set l where
   refl : a ≅ a
+
 
 postulate ext : ∀{i j}{A : Set i}{B B' : A → Set j}{f : ∀ a → B a}{g : ∀ a → B' a} → 
                 (∀ a → f a ≅ g a) → f ≅ g
+
+postulate prop-ext : ∀{i j}{A : Set i}{B : A → Set j}{f : ∀ a → B a}{g : ∀ a → B a} → 
+                (∀ a → f a ≡ g a) → f ≡ g
+
+≅-to-≡ : ∀{l : Level}{A : Set l}{a b : A} → a ≅ b → a ≡ b
+≅-to-≡ refl = prop-refl
 
 -- this could just be derived from ext
 postulate iext : ∀{i j}{A : Set i}{B B' : A → Set j}{f : ∀ {a} → B a}{g : ∀{a} → B' a} → 
