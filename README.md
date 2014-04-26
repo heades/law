@@ -48,3 +48,4 @@ Files:
 
   - [Category/NatTrans.agda](Category/NatTrans.agda)
     - Natural transformations.
+
