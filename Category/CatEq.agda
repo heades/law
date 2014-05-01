@@ -8,6 +8,16 @@ open import Level
 open import Category.Category
 open import Setoid.Total
 
+-- The following models the communative square:
+--
+--  A ---f₁---> C
+--  |           |
+--  f₃          f₂
+--  |           |
+‌--  V           V
+--  D ---f₄---> D
+-- 
+-- However, as an equation.
 comm-square : {l : Level}{ℂ : Cat {l}}{A B D C : Obj ℂ} 
             → el (Hom ℂ A B) 
             → el (Hom ℂ B C) 

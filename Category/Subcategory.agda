@@ -39,7 +39,8 @@ subcat ℂ O oinc minc idPF compPF =
                extT = λ {y}{z} x₁ x₂ → extT (comp ℂ {oinc A} {oinc B} {oinc C}) x₁ (subel x₂) };
     id = λ {A} → record { subel = id ℂ {oinc A}; insub = idPF {A} };
     assocPf = assocPf ℂ;
-    idPf = idPf ℂ 
+    idPf = idPf ℂ;
+    idPfCom = idPfCom ℂ
   }
 
 -- An alternate definition of a subcategory where the predicate is not
@@ -63,4 +64,5 @@ subcat-pred ℂ O oinc minc idPF compPF =
      comp = λ {A} {B} {C} → ↓BinSetoidFun (comp ℂ) compPF;
        id = (id ℂ , idPF);
   assocPf = assocPf ℂ;
-     idPf = idPf ℂ }
+     idPf = idPf ℂ;
+     idPfCom = idPfCom ℂ}

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
 -- This file contains the definition of natural isomorphisms. --
 ----------------------------------------------------------------
-module Natiso where
+module Category.NatIsomorphism where
 
 open import Category.NatTrans public
 open import Category.Iso public

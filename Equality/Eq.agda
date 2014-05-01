@@ -13,6 +13,8 @@ module Equality.Eq where
 
 open import Level
 
+open import Relation.Relation
+
 open import Relation.Binary.PropositionalEquality public renaming (sym to prop-sym ; trans to prop-trans; refl to prop-refl)
 
 data _≅_ {l : Level} {A : Set l} (a : A) : {A' : Set l} → A' → Set l where
@@ -38,6 +40,9 @@ sym refl = refl
 
 trans : ∀{l : Level}{A : Set l}{a b c : A} → a ≅ b → b ≅ c → a ≅ c
 trans refl refl = refl
+
+isEqRel : ∀{l : Level}{A : Set l} → EqRel {A = A}  (λ x y → x ≅ y)
+isEqRel {l} {A} = record { parEqPf = record { symPf = sym; transPf = trans }; refPf = refl }
 
 ir : ∀{l : Level}{A A' : Set l}{a : A}{a' : A'}{p q : a ≅ a'} → p ≅ q
 ir {p = refl}{q = refl} = refl

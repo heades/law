@@ -10,10 +10,10 @@ module Setoid.Total where
 open import Level renaming (suc to lsuc)
 open import Data.Product
 
-open import Relation.Relation
+open import Relation.Relation 
 
-open ParRel
-open EqRel
+open ParRel public
+open EqRel public
 
 -- Total setoids.
 record Setoid {l : Level} : Set (lsuc l) where

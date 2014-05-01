@@ -31,3 +31,8 @@ a ≇ b = (a ≅ b → ⊥)
 
 postulate eq-dec : ∀{l}{A B : Set l} → (a : A) → (b : B) → a ≅ b ⊎ a ≇ b
 
+PosetCat : {l : Level} → (J : Poset {l}) → Cat {l}
+PosetCat J = (po-cat (poset-cat J))
+
+PosetObj : {l : Level} → (J : Poset {l}) → Set l
+PosetObj J = Obj (PosetCat J)
