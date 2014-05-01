@@ -15,8 +15,8 @@ record EqRel {l l' : Level}{A : Set l}(R : A → A → Set l') : Set (l ⊔ l') 
     parEqPf : ParRel R
     refPf   : ∀{x} → R x x
 
-open ParRel
-open EqRel
+open ParRel public
+open EqRel public
 
 -- The product of two relations.
 ProductRel : {l l' : Level}{A : Set l}{B : Set l'} 
