@@ -10,6 +10,7 @@ open import Data.Empty
 open import Setoid.Total
 open import Category.Category
 open import Equality.Eq
+
 record PO {l : Level} : Set (lsuc l) where
   field
     -- The underlying category.
@@ -39,15 +40,7 @@ module 4PO where
       id₃ : 4PHom i₃ i₃      
       f₄ : 4PHom i₃ i₄            
       f₅ : 4PHom i₁ i₄
-      id₄ : 4PHom i₄ i₄
-    
-    data ⊥-poly {l : Level} : Set l where
-
-    ⊥-poly-elim : ∀ {l w} {Whatever : Set w} → ⊥-poly {l} → Whatever
-    ⊥-poly-elim ()
-
-    EmptySetoid : {l : Level} → Setoid {l}
-    EmptySetoid = record { el = ⊥-poly; eq = λ x y → x ≅ y; eqRpf = isEqRel }
+      id₄ : 4PHom i₄ i₄   
     
     -- The Hom.
     4Hom : {l : Level} → 4Obj {l} → 4Obj {l} → Setoid {l}

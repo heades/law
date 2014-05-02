@@ -11,6 +11,8 @@ open import Level renaming (suc to lsuc)
 open import Data.Product
 
 open import Relation.Relation 
+open import Basics public
+open import Equality.Eq public
 
 open ParRel public
 open EqRel public
@@ -27,6 +29,10 @@ open Setoid public
 -- Notation for the underlying equivalence of a setoid.
 ⟨_⟩[_≡_] : {l : Level} → (A : Setoid {l}) → el A → el A → Set l
 ⟨ A ⟩[ x ≡ y ] = eq A x y
+
+-- Total empty setoids.
+EmptySetoid : {l : Level} → Setoid {l}
+EmptySetoid = record { el = ⊥-poly; eq = λ x y → x ≅ y; eqRpf = isEqRel }
 
 -- Total setoids maps.  Barthe et al. calls "map."
 record SetoidFun {l₁ l₂ : Level} (A : Setoid {l₁}) (B : Setoid {l₂}) : Set (l₁ ⊔ l₂) where

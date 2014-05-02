@@ -33,7 +33,7 @@ UFunc : {l l' : Level}{J : PO {l}}{ℂ : Cat {l'}} → Comm-Diagram J ℂ → Fu
 UFunc D = Diagram.diag (diag D)
 
 -- This module shows that comm. squares can be modeled by POs.
-module Diagram-Schemes-Need-Not-Be-Posets where
+module Commutative-Squares where
   open 4PO
 
   record Comm-Square' 
