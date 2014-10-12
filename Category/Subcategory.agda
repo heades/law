@@ -1,3 +1,7 @@
+---------------------------------------------------------------
+-- This file contains the definitions of several versions of --
+-- subcategories.                                            --
+---------------------------------------------------------------
 module Category.Subcategory where
 
 open import Level
@@ -34,7 +38,10 @@ open CatPred
 -- Subcategories:
 
 -- The restriction of a category ℂ to the category determined by the
--- categorical predicate P.
+-- categorical predicate P.  Note that the objects of this category
+-- are pairs of an object and a proof that the object belongs in the
+-- category, and morphisms are similarly defined but using setoid
+-- predicates.
 subcatPred : {l : Level}{ℂ : Cat {l}}
   → (P : CatPred ℂ)
   → Cat {l}
