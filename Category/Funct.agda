@@ -9,6 +9,7 @@ open import Setoid.Total
 open import Category.Category
 
 record Functor {l₁ l₂ : Level} (ℂ₁ : Cat {l₁}) (ℂ₂ : Cat {l₂}) : Set (l₁ ⊔ l₂) where
+  constructor Funct_,_,_,_
   field
     -- The object map.
     omap : Obj ℂ₁ → Obj ℂ₂

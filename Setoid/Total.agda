@@ -19,6 +19,7 @@ open EqRel public
 
 -- Total setoids.
 record Setoid {l : Level} : Set (lsuc l) where
+ constructor Setoid_,_,_
  field 
    el : Set l
    eq  : el → el → Set l

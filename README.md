@@ -37,7 +37,14 @@ Files:
     - Commutative squares.
 
   - [Category/Subcategory.agda](Category/Subcategory.agda)
-    - Subcategories.
+    - Categorical predicates.
+    - Subcategories determined by a categorical predicate.
+    - Subcategories determined by a mapping between a set of objects
+      and the objects of a category, and a setoid predicate on
+      hom-spaces.
+    - Subcategories determined by a mapping between a set of objects
+      and the objects of a category, and an ordinary predicate on
+      hom-spaces.
 
   - [Category/CategoryCons.agda](Category/CategoryCons.agda)
     - Product categories.

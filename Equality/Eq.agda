@@ -20,7 +20,6 @@ open import Relation.Binary.PropositionalEquality public renaming (sym to prop-s
 data _≅_ {l : Level} {A : Set l} (a : A) : {A' : Set l} → A' → Set l where
   refl : a ≅ a
 
-
 postulate ext : ∀{i j}{A : Set i}{B B' : A → Set j}{f : ∀ a → B a}{g : ∀ a → B' a} → 
                 (∀ a → f a ≅ g a) → f ≅ g
 
@@ -69,21 +68,13 @@ eqApp2 : ∀{i j k}{A : Set i}{B : A → Set j}{C : Set k}{a a' : A} → a ≅ a
             (f : (a : A) → B a → C) → f a b ≅ f a' b'
 eqApp2 refl refl f = refl
 
-eqApp3 : ∀{l}{A : Set l}{B : Set (suc l)}{C : A → Set (suc l)}{D : Set (suc l)}
-        (f : (x : A)(y : B)(z : C x) → D) →
-        {a a' : A} → a ≅ a' → 
-        {b : B}{b' : B} → b ≅ b' → 
-        {c : C a}{c' : C a'} → c ≅ c' → 
-        f a b c ≅ f a' b' c'
+eqApp3 : ∀{x y z w}{A : Set x}{B : A → Set y}{C : (a : A) → B a → Set z}{E : Set w}
+             (f : (a : A)(b : B a)(c : C a b) → E) → 
+             {a a' : A} → a ≅ a' → 
+             {b : B a}{b' : B a'} → b ≅ b' → 
+             {c : C a b}{c' : C a' b'} → c ≅ c' → 
+             f a b c ≅ f a' b' c'
 eqApp3 f refl refl refl = refl
-
-feqApp3' : ∀{l}{A : Set l}{B : Set (suc l)}{C : A → Set (suc l)}{D : Set (suc l)}
-        (f  : (x : A)(y : B)(z : C x) → D) →
-        (f' : (x : A)(y : B)(z : C x) → D) →
-        f ≅ f' →
-        {a : A} →
-        f a  ≅ f' a 
-feqApp3' f f' p {a} = eqApp {f = λ h → h a} p
 
 depfeqApp3a : ∀{l}{A : Set l}{B : Set (suc l)}{C : A → Set (suc l)}{D : Set (suc l)}
         (f  : (x : A)(y : B)(z : C x) → D) →
